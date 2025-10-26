@@ -1,4 +1,6 @@
-import { Welcome } from "../welcome/welcome";
+import CTASection from "~/components/home-sections/cta-section";
+import HeroSection from "~/components/home-sections/hero-section";
+import ThalasemiaInfoSection from "~/components/home-sections/info-section";
 
 export function meta() {
   return [
@@ -12,5 +14,11 @@ export function meta() {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div>
+      <HeroSection />
+      <ThalasemiaInfoSection />
+      <CTASection />
+    </div>
+  );
 }
