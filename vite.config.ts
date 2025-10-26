@@ -5,10 +5,5 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { netlifyPlugin } from "@netlify/remix-adapter/plugin";
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      external: ["virtual:remix/server-build"],
-    },
-  },
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), netlifyPlugin()],
 });
