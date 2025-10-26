@@ -1,10 +1,13 @@
-import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Edukasi Thalasemia - Sehati Bersama" },
+    {
+      name: "description",
+      content:
+        "Pelajari tentang Thalasemia, penyebab, gejala, dan pencegahannya untuk hidup lebih sehat.",
+    },
   ];
 }
 
