@@ -129,7 +129,7 @@ export default function ThalasemiaInfoSection() {
                       </>
                     ) : (
                       <>
-                        Baca Selengkapnya <ArrowRight className="w-5 h-5" />
+                        Baca Selengkapnya <ArrowRight className="w-2 h-2" />
                       </>
                     )}
                   </button>
