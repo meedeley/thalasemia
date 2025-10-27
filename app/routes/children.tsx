@@ -1,159 +1,348 @@
-import { useState, useRef } from "react";
-import { Heart, Sparkles } from "lucide-react";
-import { Button } from "app/components/ui/button";
-import HTMLFlipBook from "react-pageflip";
+import React, { useState, useEffect, useRef } from 'react';
+import { BookOpen, Heart, Eye, Star, ArrowUp, Volume2, VolumeX } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-interface PageData {
-  title: string;
-  subtitle?: string;
-  content: string;
-  isCover?: boolean;
-  isEnd?: boolean;
+interface Chapter {
+    id: number;
+    title: string;
+    icon: LucideIcon;
 }
 
-export default function RafiStoryBook() {
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const bookRef = useRef<any>(null);
+const RafiStory = (): React.ReactElement => {
+    const [activeChapter, setActiveChapter] = useState<number>(1);
+    const [isMuted, setIsMuted] = useState<boolean>(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const pages: PageData[] = [
-    {
-      title: "Anak Pemberani & Kekuatan Darah",
-      subtitle: "Kisah inspiratif tentang Rafi, si Anak Pemberani",
-      content:
-        "Sebuah panduan visual untuk kesehatan dan semangat yang tak terbatas.",
-      isCover: true,
-    },
-    {
-      title: "Petualangan Rafi",
-      subtitle: "Kenapa Rafi Cepat Lelah, ya?",
-      content:
-        'Suatu pagi yang cerah, Rafi berlari kecil di halaman sambil membawa bola kesayangannya. Dia ingin bermain dengan teman-teman. Tapi, baru saja berlari sebentar, napasnya jadi berat. Rafi terduduk di rumput sambil memegangi dadanya.\n\n"Bu, kenapa ya aku cepat capek?" tanya Rafi dengan wajah penasaran. Ibu tersenyum dan mengusap kepalanya. "Mungkin kita harus ke dokter untuk mencari tahu kenapa kamu cepat lelah."',
-    },
-    {
-      title: "Kunjungan ke Dokter",
-      content:
-        'Keesokan harinya, Rafi pergi ke rumah sakit. Dokter Nia menyambutnya dengan senyum hangat.\n\n"Rafi, dalam tubuh kita ada darah yang membawa oksigen ke seluruh tubuh," kata dokter. "Tapi sel darahmu sedikit kurang kuat. Ini disebut talasemia. Jadi kamu harus mendapatkan perawatan supaya tetap kuat dan bisa bermain lagi."',
-    },
-    {
-      title: "Cerita Baru Rafi",
-      subtitle: "Darah yang Butuh Bantuan",
-      content:
-        'Dokter Nia: "Di dalam tubuh, ada pasukan kecil bernama sel darah merah yang bekerja tanpa lelah membawa oksigen ke seluruh tubuh. Namun suatu hari, pasukan itu mulai berkurang jumlahnya dan menjadi lemah. Akibatnya, tubuh pun merasa cepat lelah dan lesu. Itulah yang disebut anemia — saat pasukan pembawa oksigen tidak cukup kuat untuk menjalankan tugas pentingnya."',
-    },
-    {
-      title: "Rafi Menjadi Berani",
-      content:
-        'Beberapa hari kemudian, Rafi harus dipasang jarum kecil supaya tubuhnya sehat. Awalnya Rafi takut, tapi Ibu pegangan tangannya dan bilang, "Rafi hebat! Jarum ini membantu darahmu jadi kuat."\n\nRafi mengangguk pelan. Dalam hatinya, ia membayangkan sel-sel darah kecil di tubuhnya sedang bekerja keras seperti prajurit pemberani.',
-    },
-    {
-      title: "Saat Tubuh Rafi Minta Diperhatikan",
-      content:
-        'Rafi tarik napas dalam sembari berkata, "Aku berani, Bu! Aku mau cepat sembuh supaya bisa main bola lagi."\n\nJarum dipasang pelan-pelan. Rafi memegangi boneka kecil. Ibu pun tersenyum lembut sambil membelai rambut Rafi. Ibu berkata: "Nak, jangan khawatir, ya." Rafi mengangguk penuh semangat. Rafi menjawab: "Aku mau kuat seperti darah yang berani, Bu!"',
-    },
-    {
-      title: "Bertemu Teman Baru",
-      subtitle: "Perjalanan Rafi Menjadi Pemberani",
-      content:
-        'Rafi melihat anak seusianya yang juga terpasang infus sembari tersenyum, seolah berkata bahwa mereka sedang berjuang bersama. Saat itu, Rafi tersadar — ia tidak sendirian.\n\nDokter Nia datang dengan wajah ramah dan berkata lembut, "Rafi, setiap kali kamu berobat, kamu jadi lebih kuat, ya. Jangan takut, ini langkah kecilmu jadi pahlawan."',
-    },
-    {
-      title: "Rafi Si Pahlawan Kecil",
-      content:
-        'Sejak hari itu, Rafi pegang janji — selalu berani berobat, dengarkan tubuhnya, dan jaga kesehatan seperti pahlawan kecil.\n\nSetelah transfusi darah selesai, tubuh Rafi terasa hangat dan penuh tenaga. Ia segera berlari kecil ke arah ibunya sambil berseru, "Bu! Aku nggak capek lagi! Aku mau terus kuat!"',
-    },
-    {
-      title: "Pesan dari Rafi",
-      content:
-        'Dia tahu, dengan keberanian dan semangat, ia bisa melewati semua ini. Rafi pun semakin rajin menjaga diri, makan makanan sehat, dan selalu beristirahat cukup. Dia percaya suatu hari nanti, dia akan kembali bermain bola dengan bebas dan bahagia bersama teman-temannya.\n\n"Berani berobat, berarti berani sehat."\n\nRafi bayangkan pasukan merah kecil lari-lari bom-bom di tubuhnya. Suntik? Ah, itu kayak pelukan dari teman-teman kecil!',
-      isEnd: true,
-    },
-  ];
+    useEffect(() => {
+        // Create audio element
+        const audio = new Audio('/assets/music/children.mp3');
+        audioRef.current = audio;
+        
+        // Set volume to 50%
+        audio.volume = 0.3;
+        
+        // Set to loop
+        audio.loop = true;
 
-  const onFlip = (e: any) => {
-    setCurrentPage(e.data);
-  };
+        // Auto-play when component mounts
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch((error) => {
+                console.log("Autoplay prevented:", error);
+            });
+        }
 
-  const renderPageContent = (page: PageData) => {
-    const paragraphs = page.content ? page.content.split("\n\n") : [];
+        // Cleanup function
+        return () => {
+            audio.pause();
+            audio.src = "";
+        };
+    }, []);
+
+    const toggleMute = () => {
+        if (audioRef.current) {
+            if (isMuted) {
+                audioRef.current.volume = 0.5;
+            } else {
+                audioRef.current.volume = 0;
+            }
+            setIsMuted(!isMuted);
+        }
+    };
+
+    const chapters: Chapter[] = [
+        { id: 1, title: 'Mengenal Thalasemia', icon: BookOpen },
+        { id: 2, title: 'Memahami Anemia', icon: Heart },
+        { id: 3, title: 'Observasi Dini', icon: Eye },
+        { id: 4, title: 'Komitmen Berobat', icon: Star }
+    ];
+
+    const scrollToChapter = (chapterId: number): void => {
+        setActiveChapter(chapterId);
+        const element = document.getElementById(`chapter${chapterId}`);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
-      <div className="flex flex-col h-full p-12 bg-white book-page">
-        <h1 className="text-xl font-bold mb-2 text-pink-600">{page.title}</h1>
-        {page.subtitle && (
-          <h2 className="text-xl italic mb-4 text-pink-500">{page.subtitle}</h2>
-        )}
-        <div className="text-lg text-gray-700 leading-relaxed space-y-4 overflow-y-auto">
-          {paragraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <section className="py-20 mt-20 overflow-hidden bg-transparent">
-      <div className="container mx-auto z-10 px-4 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Book Title */}
-          <div className="text-center z-11 mb-12">
-            <h1 className="text-xl font-bold text-pink-600 mb-3 flex items-center justify-center gap-3">
-              Kisah Rafi Si Anak Pemberani
-            </h1>
-            <p className="text-gray-600 text-lg italic">
-              Petualangan menuju kesehatan dan keberanian
-            </p>
-
-            <p className="py-3 px-4 border-pink-100 border-2 shadow-pink-500 inline-block mt-2 rounded-md bg-white italic text-sm font-semibold">
-              Seret Untuk Membaca Buku
-            </p>
-          </div>
-          <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>{" "}
-          {/* Book Container */}
-          <div className="flex justify-center mb-8">
-            <div className="book-wrapper transform rotate-3 duration-500 shadow-2xl">
-              <HTMLFlipBook
-                style={{}}
-                width={800}
-                height={1200}
-                size="stretch"
-                minWidth={400}
-                maxWidth={800}
-                minHeight={400}
-                maxHeight={800}
-                maxShadowOpacity={0.5}
-                showCover={true}
-                ref={bookRef}
-                mobileScrollSupport={true}
-                onFlip={onFlip}
-                className="demo-book"
-                usePortrait={true}
-                startPage={0}
-                drawShadow={true}
-                flippingTime={1000}
-                useMouseEvents={true}
-                swipeDistance={30}
-                clickEventForward={true}
-                showPageCorners={true}
-                disableFlipByClick={false}
-                startZIndex={0}
-                autoSize={true}
-              >
-                {pages.map((page, index) => (
-                  <div key={index} className="page">
-                    <div className="decorative-corner-top"></div>
-                    <div className="decorative-corner-bottom"></div>{" "}
-                    <div className="page-number">
-                      {index + 1} / {pages.length}
-                    </div>
-                    {renderPageContent(page)}
-                  </div>
-                ))}
-              </HTMLFlipBook>
+        <div lang="id" className="bg-white min-h-screen font-['Comic_Sans_MS','Comic_Neue',cursive] relative pb-20">
+            {/* Sound Control Button */}
+            <button
+                onClick={toggleMute}
+                className="fixed top-4 right-4 z-50 bg-pink-500 p-3 rounded-full shadow-lg hover:bg-pink-600 transition-colors text-white"
+                title={isMuted ? "Unmute" : "Mute"}
+            >
+                {isMuted ? (
+                    <VolumeX size={24} />
+                ) : (
+                    <Volume2 size={24} />
+                )}
+            </button>
+            
+            {/* Floating Navigation */}
+            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-pink-500 rounded-full shadow-2xl p-2 flex gap-2">
+                {chapters.map((chapter) => {
+                    const Icon = chapter.icon;
+                    return (
+                        <button
+                            key={chapter.id}
+                            onClick={() => scrollToChapter(chapter.id)}
+                            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                                activeChapter === chapter.id 
+                                    ? 'bg-white text-pink-500 scale-110' 
+                                    : 'bg-pink-400 text-white hover:bg-pink-300'
+                            }`}
+                            title={chapter.title}
+                        >
+                            <Icon size={20} />
+                        </button>
+                    );
+                })}
             </div>
-          </div>
+
+            {/* Chapter 1 */}
+            <section id="chapter1" className="min-h-screen pt-32 px-4 py-8 bg-pink-50">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform rotate-1">
+                        <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 -rotate-1">
+                            <h2 className="text-2xl font-black text-center">CHAPTER 1</h2>
+                            <h3 className="text-3xl font-black text-center mt-2">Mengenal Thalasemia</h3>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
+                        <div className="mb-6">
+                            <img src="/assets/images/children-section/pict4.png" alt="Ilustrasi Pemeriksaan Dokter" className="w-full rounded-2xl border-4 border-pink-100" />
+                        </div>
+
+                        <div className="bg-yellow-100 border-4 border-yellow-100 rounded-2xl p-4 mb-4">
+                            <p className="text-xl leading-relaxed">
+                                 Suatu pagi yang cerah, Rafi berlari kecil di halaman sambil membawa bola kesayangannya. Dia ingin bermain dengan teman-teman. Tapi, baru saja berlari sebentar, napasnya jadi berat. Rafi terduduk di rumput sambil memegangi dadanya. 
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 my-6">
+                            <div className="flex items-start gap-3 mb-4">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Bu, mengapa aku cepat lelah, ya?"</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-purple-400 text-white rounded-full px-4 py-2 font-black shrink-0">Ibu</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Nak, kita perlu pergi ke dokter untuk tahu penyebabnya!"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-blue-100 border-4 border-blue-100 rounded-2xl p-4">
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="bg-blue-500 text-white rounded-full px-4 py-2 font-black">Dokter Nia</div>
+                            </div>
+                            <p className="text-lg leading-relaxed">
+                                "Rafi, di dalam tubuh kita ada darah yang bekerja keras membawa oksigen! 🩸 Kadang, sel darahmu sedikit lebih lemah. Itu disebut <span className="bg-yellow-300 px-2 py-1 rounded">THALASEMIA</span>. Tapi jangan khawatir! Dengan perawatan yang tepat, kamu tetap bisa tumbuh sehat!"
+                            </p>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </section>
+
+            {/* Chapter 2 */}
+            <section id="chapter2" className="min-h-screen px-4 py-8 bg-white">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform -rotate-1">
+                        <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 rotate-1">
+                            <h2 className="text-2xl font-black text-center">CHAPTER 2</h2>
+                            <h3 className="text-3xl font-black text-center mt-2">Memahami Anemia</h3>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
+                        <div className="mb-6">
+                            <img src="/assets/images/children-section/pict2.png" alt="Ilustrasi Transfusi Darah" className="w-full rounded-2xl border-4 border-pink-100" />
+                        </div>
+
+                        <div className="bg-red-100 border-4 border-red-100 rounded-2xl p-4 mb-6">
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="bg-blue-500 text-white rounded-full px-4 py-2 font-black">Dokter Nia</div>
+                            </div>
+                            <p className="text-lg leading-relaxed">
+                                "Di dalam tubuh, ada <span className="bg-red-300 px-2 py-1 rounded">PASUKAN KECIL</span> bernama sel darah merah! 🔴 Mereka bekerja tanpa lelah membawa oksigen. Tapi suatu hari, pasukan itu mulai berkurang dan menjadi lemah... Akibatnya tubuh jadi cepat lelah. Itu namanya <span className="bg-yellow-300 px-2 py-1 rounded">ANEMIA</span>!"
+                            </p>
+                        </div>
+
+                        <div className="bg-yellow-50 rounded-2xl p-6 border-4 border-yellow-100 mb-6">
+                            <div className="flex items-start gap-3">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black flex-shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-4 border-2 border-pink-100 flex-1">
+                                    <p className="text-xl">"Jadi aku harus jadi teman yang baik untuk darahku, ya Dok?" 🤔</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mb-6">
+                            <img src="/assets/images/children-section/pict6.png" alt="Ilustrasi Perawatan" className="w-full rounded-2xl border-4 border-pink-100" />
+                        </div>
+
+                        <div className="bg-pink-50 border-4 border-pink-100 rounded-2xl p-6">
+                            <p className="text-center text-2xl font-black mb-4">💪 KOMITMEN RAFI 💪</p>
+                            <p className="text-lg leading-relaxed text-center italic">
+                                Rafi mengangguk pelan. Ia membayangkan sel-sel darah kecil di tubuhnya seperti prajurit pemberani! 🦸‍♂️ Sejak hari itu, Rafi berjanji akan jadi sahabat terbaik bagi darahnya!
+                            </p>
+                        </div>
+                    </div>
+
+                  
+                </div>
+            </section>
+
+            {/* Chapter 3 */}
+            <section id="chapter3" className="min-h-screen px-4 py-8 bg-pink-50">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform rotate-1">
+                        <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 -rotate-1">
+                            <h2 className="text-2xl font-black text-center">CHAPTER 3</h2>
+                            <h3 className="text-3xl font-black text-center mt-2">Observasi Dini</h3>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
+                        <div className="mb-6">
+                            <img src="/assets/images/children-section/pict3.png" alt="Ilustrasi Dukungan Keluarga" className="w-full rounded-2xl border-4 border-pink-100" />
+                        </div>
+
+                        <div className="bg-blue-100 border-4 border-blue-100 rounded-2xl p-4 mb-6">
+                            <p className="text-xl leading-relaxed">
+                                Suatu pagi, Rafi melihat tubuhnya di cermin. Kulitnya tampak lebih pucat 😨 dan bibirnya berwarna kebiruan seperti langit sebelum hujan ☁️
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 mb-6">
+                            <div className="flex items-start gap-3 mb-4">
+                                <div className="bg-purple-400 text-white rounded-full px-4 py-2 font-black flex-shrink-0">Ibu</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Nak, tubuhmu butuh bantuan dokter lagi. Tapi jangan khawatir ya!"</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black flex-shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Aku mau kuat seperti darah yang berani, Bu!" 💪</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-50 border-4 border-yellow-100 rounded-2xl p-6">
+                            <p className="text-xl font-black text-center mb-3">✨ DI RUMAH SAKIT ✨</p>
+                            <p className="text-lg leading-relaxed text-center">
+                                Rafi melihat banyak anak lain yang juga sedang berobat. Mereka tersenyum meski duduk di kursi infus! 😊 Saat itu Rafi tersadar — <span className="bg-pink-300 px-2 py-1 rounded">IA TIDAK SENDIRIAN!</span>
+                            </p>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </section>
+
+            {/* Chapter 4 */}
+            <section id="chapter4" className="min-h-screen px-4 py-8 bg-white">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform -rotate-1">
+                        <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 rotate-1">
+                            <h2 className="text-2xl font-black text-center">CHAPTER 4</h2>
+                            <h3 className="text-3xl font-black text-center mt-2">Komitmen Berobat</h3>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
+                        <div className="mb-6">
+                            <img src="/assets/images/children-section/pict8.png" alt="Ilustrasi Anak Bersemangat" className="w-full rounded-2xl border-4 border-pink-100" />
+                        </div>
+
+                        <div className="bg-green-100 border-4 border-green-100 rounded-2xl p-4 mb-6">
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="bg-blue-500 text-white rounded-full px-4 py-2 font-black">Dokter Nia</div>
+                            </div>
+                            <p className="text-lg leading-relaxed">
+                                "Setiap kali kamu berobat, kamu sedang bertambah kuat, Rafi! 💉 Jangan takut ya. Ini bagian dari perjalananmu jadi <span className="bg-yellow-300 px-2 py-1 rounded">PAHLAWAN KECIL!</span> 🦸‍♂️"
+                            </p>
+                        </div>
+
+                        <div className="bg-yellow-100 border-4 border-yellow-100 rounded-2xl p-4 mb-6">
+                            <p className="text-xl font-black text-center mb-3">⚡ SETELAH TRANSFUSI ⚡</p>
+                            <p className="text-lg leading-relaxed text-center">
+                                Tubuh Rafi terasa hangat dan penuh tenaga! Ia berlari kecil ke arah ibunya sambil berseru:
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 mb-6">
+                            <div className="flex items-start gap-3">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black flex-shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-4 border-2 border-pink-100 flex-1">
+                                    <p className="text-2xl">"Bu! Aku nggak capek lagi! Aku mau terus kuat!" 🎉</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-red-100 border-4 border-red-100 rounded-2xl p-6">
+                            <p className="text-xl font-black text-center mb-3">⭐ JANJI RAFI ⭐</p>
+                            <p className="text-lg leading-relaxed text-center">
+                                Sejak hari itu, Rafi memegang janjinya erat-erat — untuk selalu berani datang berobat dan menjaga kesehatannya dengan semangat seorang PAHLAWAN SEJATI! 💪✨
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="text-center">
+                        <div className="bg-pink-500 text-white inline-block px-6 py-2 rounded-full font-black text-xl transform rotate-2 shadow-lg">
+                            🎬 TAMAT 🎬
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Epilog */}
+            <section id="epilog" className="px-4 py-8 bg-pink-50">
+                <div className="max-w-2xl mx-auto">
+                    <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
+                        <div className="bg-pink-500 text-white rounded-2xl p-6 mb-6">
+                            <h2 className="text-5xl font-black text-center mb-4">TAMAT! 🎉</h2>
+                            <p className="text-2xl font-black text-center italic">
+                                "Berani berobat, berarti berani sehat!" 💪
+                            </p>
+                        </div>
+
+                        <div className="bg-yellow-50 border-4 border-yellow-100 rounded-2xl p-6 mb-6">
+                            <p className="text-lg leading-relaxed">
+                                Kisah Rafi kini jadi cerita penuh semangat! 🌟 Setiap kali darah baru mengalir ke tubuhnya, Rafi membayangkan pasukan kecil berwarna merah berlari membawa kekuatan! 🩸✨
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 border-4 border-pink-100 rounded-2xl p-6">
+                            <p className="text-xl font-black text-center mb-4">💖 PESAN PENTING 💖</p>
+                            <p className="text-lg leading-relaxed text-center">
+                                Keberanian bukan berarti tidak takut, tapi tetap tersenyum dan mau berobat meski sedang berjuang! 😊 Kekuatan sejati datang dari keberanian merawat diri sendiri!
+                            </p>
+                        </div>
+
+                        <div className="text-center mt-8">
+                            <button 
+                                onClick={() => scrollToChapter(1)}
+                                className="bg-pink-500 text-white px-8 py-4 rounded-full font-black text-lg shadow-lg hover:bg-pink-600 transform hover:scale-105 transition-all"
+                            >
+                                <ArrowUp className="inline mr-2" size={20} />
+                                BACA LAGI DARI AWAL!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-      </div>
-    </section>
-  );
+    );
 }
+
+export default RafiStory;
