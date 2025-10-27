@@ -28,15 +28,15 @@ export default function PreventiveSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
-            <Card className="p-8 bg-white/60 backdrop-blur-lg border border-pink-100 rounded-2xl hover:shadow-xl transition-all">
-              <div className="w-14 h-14 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                <Check className="w-7 h-7 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="p-6 sm:p-8 bg-white/60 backdrop-blur-lg border border-pink-100 rounded-2xl hover:shadow-xl transition-all">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
+                <Check className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Tes Darah Wajib
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 Pasangan yang ingin punya anak sebaiknya menjalani tes Hb
                 elektroforesis untuk mengetahui apakah mereka membawa sifat
                 Thalasemia. Tes ini penting untuk mencegah penularan Thalasemia
@@ -44,14 +44,14 @@ export default function PreventiveSection() {
               </p>
             </Card>
 
-            <Card className="p-8 bg-white/60 backdrop-blur-lg border border-pink-100 rounded-2xl hover:shadow-xl transition-all">
-              <div className="w-14 h-14 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                <span className="text-xl font-bold text-white">25%</span>
+            <Card className="p-6 sm:p-8 bg-white/60 backdrop-blur-lg border border-pink-100 rounded-2xl hover:shadow-xl transition-all">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
+                <span className="text-lg sm:text-xl font-bold text-white">25%</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                 Hitungan Risiko
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 Jika kedua pasangan membawa sifat Thalasemia, anak mereka
                 memiliki risiko 25% terlahir dengan Thalasemia Mayor. Konseling
                 genetik membantu pasangan memahami risiko dan membuat keputusan
@@ -59,17 +59,17 @@ export default function PreventiveSection() {
               </p>
             </Card>
 
-            <Card className="relative col-span-2 p-8 backdrop-blur-2xl border border-pink-100 rounded-2xl hover:shadow-xl transition-all overflow-hidden">
+            <Card className="relative col-span-1 md:col-span-2 p-6 sm:p-8 backdrop-blur-2xl border border-pink-100 rounded-2xl hover:shadow-xl transition-all overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-pink-400 rounded-full blur-3xl opacity-30 -translate-y-16 translate-x-16"></div>
               <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-600 rounded-full blur-3xl opacity-20 translate-y-20 -translate-x-20"></div>
-              <div className="relative w-14 h-14 bg-transparent rounded-xl flex items-center justify-center mb-4">
-                <Users className="w-7 h-7 text-pink-500" />
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 bg-transparent rounded-xl flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 sm:w-7 sm:h-7 text-pink-500" />
               </div>
-              <h3 className="relative text-xl font-semibold text-gray-800 mb-3">
+              <h3 className="relative text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">
                 Konseling Genetik
               </h3>
-              <p className="relative text-gray-600 leading-relaxed">
+              <p className="relative text-sm sm:text-base text-gray-600 leading-relaxed">
                 Konsultasi dengan dokter spesialis genetik atau hematologi
                 sangat penting untuk memahami hasil tes serta membantu pasangan
                 dalam merencanakan keluarga secara aman dan tepat.
