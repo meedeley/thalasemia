@@ -117,7 +117,7 @@ export default function ThalasemiaInfoSection() {
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center md:hidden">
                   <button
                     onClick={() => toggleExpand(index)}
-                    className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 text-base font-semibold text-white rounded-full shadow-lg transition-colors duration-200 ${
+                    className={`inline-flex items-center justify-center gap-2 px-6 py-2 text-[13px] font-semibold text-white rounded-full shadow-lg transition-colors duration-200 ${
                       expandedIndex === index
                         ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700 min-w-[120px]'
                         : 'bg-pink-500 hover:bg-pink-600 active:bg-pink-700 min-w-[180px]'

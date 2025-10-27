@@ -46,8 +46,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-base md:text-lg text-gray-600 mb-10 leading-relaxed">
-              Thalasemia itu penyakit yang bisa turun dari orang tua ke anak.
-              Mari kita pelajari bersama!
+              Thalasemia adalah penyakit turun-temurun yang membuat tubuh kesulitan memproduksi hemoglobin, sehingga anak mudah lelah, pucat, dan kadang perlu transfusi darah. Sekitar 7% populasi dunia dan 3–10% orang Indonesia membawa sifat thalasemia beta. Untuk informasi perawatan anak dengan thalasemia, kunjungi Situs Edukasi Thalasemia kapan saja!
             </p>
 
             {/* Buttons */}

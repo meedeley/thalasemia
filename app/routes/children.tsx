@@ -52,10 +52,10 @@ const RafiStory = (): React.ReactElement => {
     };
 
     const chapters: Chapter[] = [
-        { id: 1, title: 'Mengenal Thalasemia', icon: BookOpen },
-        { id: 2, title: 'Memahami Anemia', icon: Heart },
-        { id: 3, title: 'Observasi Dini', icon: Eye },
-        { id: 4, title: 'Komitmen Berobat', icon: Star }
+        { id: 1, title: 'BAGIAN 1: Thalasemia itu apa sih?', icon: BookOpen },
+        { id: 2, title: 'BAGIAN 2: Ternyata aku menjadi cepat lelah karena anemia ya?', icon: Heart },
+        { id: 3, title: 'BAGIAN 3: Tanda-tanda thalasemia itu kayak gimana, ya?', icon: Eye },
+        { id: 4, title: 'BAGIAN 4: Berani Berobat, Berani Jadi Kuat!', icon: Star }
     ];
 
     const scrollToChapter = (chapterId: number): void => {
@@ -107,8 +107,8 @@ const RafiStory = (): React.ReactElement => {
                 <div className="max-w-2xl mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform rotate-1">
                         <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 -rotate-1">
-                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">CHAPTER 1</h2>
-                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">Mengenal Thalasemia</h3>
+                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">BAGIAN 1</h2>
+                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">"Thalasemia itu apa sih?"</h3>
                         </div>
                     </div>
 
@@ -157,8 +157,8 @@ const RafiStory = (): React.ReactElement => {
                 <div className="max-w-2xl mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform -rotate-1">
                         <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 rotate-1">
-                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">CHAPTER 2</h2>
-                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">Memahami Anemia</h3>
+                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">BAGIAN 2</h2>
+                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">"Ternyata aku menjadi cepat lelah karena anemia ya?"</h3>
                         </div>
                     </div>
 
@@ -206,8 +206,8 @@ const RafiStory = (): React.ReactElement => {
                 <div className="max-w-2xl mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform rotate-1">
                         <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 -rotate-1">
-                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">CHAPTER 3</h2>
-                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">Observasi Dini</h3>
+                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">BAGIAN 3</h2>
+                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">"Tanda-tanda thalasemia itu kayak gimana, ya?"</h3>
                         </div>
                     </div>
 
@@ -254,8 +254,8 @@ const RafiStory = (): React.ReactElement => {
                 <div className="max-w-2xl mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6 transform -rotate-1">
                         <div className="bg-pink-500 text-white rounded-2xl p-4 mb-4 rotate-1">
-                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">CHAPTER 4</h2>
-                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">Komitmen Berobat</h3>
+                            <h2 className="text-2xl font-black text-center font-['Comic_Sans_MS','Comic_Neue',cursive]">BAGIAN 4</h2>
+                            <h3 className="text-3xl font-black text-center mt-2 font-['Comic_Sans_MS','Comic_Neue',cursive]">"Berani Berobat, Berani Jadi Kuat!"</h3>
                         </div>
                     </div>
 
@@ -264,19 +264,78 @@ const RafiStory = (): React.ReactElement => {
                             <img src="/assets/images/children-section/pict8.png" alt="Ilustrasi Anak Bersemangat" className="w-full rounded-2xl border-4 border-pink-100" />
                         </div>
 
+                        <div className="bg-blue-100 border-4 border-blue-100 rounded-2xl p-4 mb-6">
+                            <p className="text-lg leading-relaxed">
+                                Di rumah sakit, Rafi melihat banyak anak lain yang juga sedang transfusi. Mereka tersenyum meski sedang duduk di kursi infus, seolah berkata bahwa mereka semua sedang berjuang bersama. Saat itu, Rafi pun tersadar — ia tidak sendirian.
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 mb-6">
+                            <div className="flex items-start gap-3 mb-4">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">{`*menggenggam tangan Ibu erat*`}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-purple-400 text-white rounded-full px-4 py-2 font-black shrink-0">Ibu</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Ingat Baling-Baling Pemberani kita, Rafi?" 🌀</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-100 border-4 border-yellow-100 rounded-2xl p-4 mb-6">
+                            <p className="text-lg leading-relaxed">
+                                Rafi mengeluarkan baling-baling birunya. Saat ditiup, baling-baling itu berputar cepat membuatnya tersenyum.
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 mb-6">
+                            <div className="flex items-start gap-3 mb-4">
+                                <div className="bg-purple-400 text-white rounded-full px-4 py-2 font-black shrink-0">Ibu</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Yuk, kita hitung dan tiup sama-sama!" 🌪️</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Satu... dua... tiga! Fuuuhh...!" �</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="bg-green-100 border-4 border-green-100 rounded-2xl p-4 mb-6">
+                            <div className="flex items-center gap-2 mb-3">
+                                <div className="bg-teal-500 text-white rounded-full px-4 py-2 font-black">Perawat</div>
+                            </div>
+                            <p className="text-lg leading-relaxed">
+                                "Sudah selesai, Rafi! Kamu hebat sekali!" ⭐
+                            </p>
+                        </div>
+
+                        <div className="bg-pink-50 rounded-2xl p-6 border-4 border-pink-100 mb-6">
+                            <div className="flex items-start gap-3">
+                                <div className="bg-pink-400 text-white rounded-full px-4 py-2 font-black shrink-0">Rafi</div>
+                                <div className="bg-white rounded-2xl p-3 border-2 border-pink-100 flex-1">
+                                    <p className="text-lg">"Hah? Sudah? Nggak terasa!" 😮</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-blue-100 border-4 border-blue-100 rounded-2xl p-4 mb-6">
                             <div className="flex items-center gap-2 mb-3">
                                 <div className="bg-blue-500 text-white rounded-full px-4 py-2 font-black">Dokter Nia</div>
                             </div>
                             <p className="text-lg leading-relaxed">
-                                "Setiap kali kamu berobat, kamu sedang bertambah kuat, Rafi! 💉 Jangan takut ya. Ini bagian dari perjalananmu jadi <span className="bg-yellow-300 px-2 py-1 rounded">PAHLAWAN KECIL!</span> 🦸‍♂️"
+                                "Setiap kali kamu berobat, kamu sedang bertambah kuat, Rafi," katanya lembut. "Jangan takut ya. Ini bagian dari perjalananmu menjadi <span className="bg-yellow-300 px-2 py-1 rounded">PAHLAWAN KECIL!</span> 🦸‍♂️"
                             </p>
                         </div>
 
                         <div className="bg-yellow-100 border-4 border-yellow-100 rounded-2xl p-4 mb-6">
-                            <p className="text-xl font-black text-center mb-3 font-['Comic_Sans_MS','Comic_Neue',cursive]">⚡ SETELAH TRANSFUSI ⚡</p>
                             <p className="text-lg leading-relaxed">
-                                Tubuh Rafi terasa hangat dan penuh tenaga! Ia berlari kecil ke arah ibunya sambil berseru:
+                                Setelah transfusi darah selesai, tubuh Rafi terasa hangat dan penuh tenaga. Ia segera berlari kecil ke arah ibunya sambil berseru:
                             </p>
                         </div>
 
@@ -290,9 +349,9 @@ const RafiStory = (): React.ReactElement => {
                         </div>
 
                         <div className="bg-red-100 border-4 border-red-100 rounded-2xl p-6">
-                            <p className="text-xl font-black text-center mb-3 font-['Comic_Sans_MS','Comic_Neue',cursive]">⭐ JANJI RAFI ⭐</p>
-                            <p className="text-lg leading-relaxed text-center ">
-                                Sejak hari itu, Rafi memegang janjinya erat-erat — untuk selalu berani datang berobat dan menjaga kesehatannya dengan semangat seorang PAHLAWAN SEJATI! 💪✨
+                            <p className="text-xl font-black text-center mb-3">⭐ JANJI RAFI ⭐</p>
+                            <p className="text-lg leading-relaxed text-center">
+                                Sejak hari itu, Rafi memegang janjinya erat-erat — untuk selalu berani datang berobat, mendengarkan tubuhnya, dan menjaga kesehatannya dengan semangat seorang pahlawan sejati! 💪✨
                             </p>
                         </div>
                     </div>
@@ -310,7 +369,7 @@ const RafiStory = (): React.ReactElement => {
                 <div className="max-w-2xl mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl border-4 border-pink-100 p-6 mb-6">
                         <div className="bg-pink-500 text-white rounded-2xl p-6 mb-6">
-                            <h2 className="text-5xl font-black text-center mb-4 font-['Comic_Sans_MS','Comic_Neue',cursive]">TAMAT! 🎉</h2>
+                            <h2 className="text-5xl font-black text-center mb-4 font-['Comic_Sans_MS','Comic_Neue',cursive]">Kamu Bisa Menjadi Seperti Rafi si Pemberani</h2>
                             <p className="text-2xl font-black text-center italic font-['Comic_Sans_MS','Comic_Neue',cursive]">
                                 "Berani berobat, berarti berani sehat!" 💪
                             </p>
