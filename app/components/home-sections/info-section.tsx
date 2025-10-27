@@ -67,87 +67,69 @@ export default function ThalasemiaInfoSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {infoCards.map((card, index) => (
             <div key={index} className="group">
-              <Card className="relative bg-white min-h-[320px] sm:h-[400px] w-full max-w-sm mx-auto md:max-w-none border-2 border-pink-100 rounded-2xl p-4 sm:p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:translate-y-3 cursor-pointer">
+              <Card className="relative bg-white h-auto sm:min-h-80 sm:h-[400px] w-full max-w-sm mx-auto md:max-w-none border-2 border-pink-100 rounded-2xl p-6 pb-16 sm:p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:translate-y-3 cursor-pointer">
                 {/* Dekorasi */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-pink-400 rounded-full blur-3xl opacity-30 -translate-y-16 translate-x-16" />
-                <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-600 rounded-full blur-3xl opacity-20 translate-y-20 -translate-x-20" />
-                <div className="absolute z-10 top-0 left-1/2 -translate-x-1/2 -translate-y-[60%] w-12 h-1 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full" />
+                <div className="absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-pink-400 rounded-full blur-3xl opacity-30 -translate-y-12 translate-x-12 sm:-translate-y-16 sm:translate-x-16" />
+                <div className="absolute bottom-0 left-0 w-32 sm:w-40 h-32 sm:h-40 bg-pink-600 rounded-full blur-3xl opacity-20 translate-y-16 -translate-x-16 sm:translate-y-20 sm:-translate-x-20" />
+                <div className="absolute z-10 top-0 left-1/2 -translate-x-1/2 -translate-y-[60%] w-10 sm:w-12 h-1 bg-linear-to-r from-pink-400 to-pink-600 rounded-full" />
 
                 {/* Icon */}
                 <div className="mb-4 sm:mb-6 flex justify-center">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex justify-center items-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex justify-center items-center">
                     {card.icon}
                   </div>
                 </div>
 
                 {/* Isi */}
                 <div className="text-center">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
                     {card.title}
                   </h3>
 
                   {/* Desktop hover */}
-                  <div className="relative h-16 sm:h-20 md:h-auto">
-                    <p
-                      className="text-sm sm:text-base text-gray-600 leading-relaxed absolute inset-0 transition-opacity duration-500
-                                  md:block
-                                  md:group-hover:opacity-0
-                                  md:opacity-100
-                                  hidden
-                                  md:group-hover:invisible"
-                    >
+                  <div className="relative h-16 sm:h-20 md:h-auto hidden md:block">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed absolute inset-0 transition-opacity duration-500
+                                group-hover:opacity-0 opacity-100 group-hover:invisible">
                       {card.short}
                     </p>
 
-                    <p
-                      className="text-sm sm:text-base text-gray-700 leading-relaxed text-center pt-2 absolute inset-0 transition-all duration-1000
-                                  md:block
-                                  md:group-hover:opacity-100
-                                  md:opacity-0
-                                  hidden
-                                  md:group-hover:visible"
-                    >
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed text-center absolute inset-0 transition-all duration-500
+                                group-hover:opacity-100 opacity-0 group-hover:visible">
                       {card.long}
                     </p>
                   </div>
 
                   {/* Mobile expand */}
-                  <div className="md:hidden">
-                    <p
-                      className={`text-sm sm:text-base text-gray-600 leading-relaxed transition-all duration-300 ${
-                        expandedIndex === index
-                          ? "opacity-0 max-h-0 overflow-hidden"
-                          : "opacity-100 max-h-24"
-                      }`}
-                    >
+                  <div className="md:hidden space-y-2">
+                    <p className={`text-base text-gray-600 leading-relaxed transition-all duration-300
+                      ${expandedIndex === index ? 'h-0 opacity-0 overflow-hidden' : 'h-auto opacity-100'}`}>
                       {card.short}
                     </p>
 
-                    <p
-                      className={`text-sm sm:text-base text-gray-700 leading-relaxed text-center transition-all duration-300 ${
-                        expandedIndex === index
-                          ? "opacity-100 max-h-96 mt-2"
-                          : "opacity-0 max-h-0 overflow-hidden"
-                      }`}
-                    >
+                    <p className={`text-base text-gray-700 leading-relaxed transition-all duration-300
+                      ${expandedIndex === index ? 'h-auto opacity-100' : 'h-0 opacity-0 overflow-hidden'}`}>
                       {card.long}
                     </p>
                   </div>
                 </div>
 
                 {/* Tombol Mobile */}
-                <div className="absolute bottom-4 left-0 right-0 text-center md:hidden">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center md:hidden">
                   <button
                     onClick={() => toggleExpand(index)}
-                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-pink-500 rounded-full shadow-lg hover:bg-pink-600 transition-colors duration-200"
+                    className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 text-base font-semibold text-white rounded-full shadow-lg transition-colors duration-200 ${
+                      expandedIndex === index
+                        ? 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700 min-w-[120px]'
+                        : 'bg-pink-500 hover:bg-pink-600 active:bg-pink-700 min-w-[180px]'
+                    }`}
                   >
                     {expandedIndex === index ? (
                       <>
-                        <X className="w-4 h-4" /> Tutup
+                        <X className="w-5 h-5" /> Tutup
                       </>
                     ) : (
                       <>
-                        Baca Selengkapnya <ArrowRight className="w-4 h-4" />
+                        Baca Selengkapnya <ArrowRight className="w-5 h-5" />
                       </>
                     )}
                   </button>

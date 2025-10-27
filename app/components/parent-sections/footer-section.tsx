@@ -27,7 +27,7 @@ export default function FooterSection() {
 
         {/* Title */}
         <h2 className="text-3xl lowercase md:text-4xl font-semibold italic mb-4 antialiased">
-          "PENTINGNYA PERANG ORANG TUA UNTUK ANAK"
+          "PENTINGNYA PERAN ORANG TUA UNTUK ANAK"
         </h2>
 
         {/* Description */}
