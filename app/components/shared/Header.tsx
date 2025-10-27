@@ -86,7 +86,7 @@ export default function Header() {
               className={`bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all ${
                 isScrolled ? "text-xs h-8 px-2.5" : ""
               }`}
-              onClick={() => window.open("https://www.youtube.com/watch?v=_jLhccf79sc", "_blank")}
+              onClick={() => window.open("https://youtu.be/ARc44SDSIsY?si=z72jrBDGcQRWjGPV", "_blank")}
             >
               <Youtube className={`mr-1.5 transition-all ${isScrolled ? "h-3 w-3" : "h-4 w-4"}`} />
               {isScrolled ? "Video" : "Video Edukasi"}
@@ -138,7 +138,7 @@ export default function Header() {
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/95 to-transparent backdrop-blur-sm">
                 <Button
                   className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all h-12 flex items-center justify-center"
-                  onClick={() => window.open("https://www.youtube.com/watch?v=_jLhccf79sc", "_blank")}
+                  onClick={() => window.open("https://youtu.be/ARc44SDSIsY?si=z72jrBDGcQRWjGPV", "_blank")}
                 >
                   <Youtube className="h-4 w-4 mr-2" />
                   Video Edukasi
