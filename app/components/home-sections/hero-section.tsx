@@ -21,7 +21,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-white z-10"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 bg-white z-10"
     >
       <div className="absolute top-0 z-[-2] h-screen w-screen rotate-180 transform bg-white bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(252,205,238,.5)_100%)]"></div>{" "}
       {/* Content */}
